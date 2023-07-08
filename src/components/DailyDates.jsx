@@ -23,7 +23,7 @@ const DailyDates = ({ lat, lon, searchQuery, temperatureScale }) => {
     if (searchQuery) {
       const apiKey = '895e467400596c4581be31f04d2ed28d';
       const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchQuery}&appid=${apiKey}&units=metric`;
-console.log(apiUrl)
+
       axios
         .get(apiUrl)
         .then((response) => {
@@ -71,25 +71,54 @@ console.log(apiUrl)
           <h4>{item.dt_txt.split(' ')[1]}</h4>
           <div className='principaldateshours'>
             <div className='tempandicon'>
-              <img src={`/public/icons/${item.weather[0].icon}.png`} alt="Weather Icon" />
-              <p>{convertTemperature(item.main.temp)} °C</p>
+              <img src={mapIcon[item.weather[0].icon]} alt='Icono del clima' />
+              <p>{convertTemperature(item.main.temp)}</p>
             </div>
             <p>estado: {item.weather[0].description}</p>
           </div>
           <p>Humedad: {item.main.humidity} %</p>
-          <p>Sensacion termica: {temperatureScale === '°C' ? item.main.feels_like : Math.floor((item.main.feels_like * 9/5) + 32)} {temperatureScale}</p>
-          <p>Temperatura max: {temperatureScale === '°C' ? item.main.temp_max : Math.floor((item.main.temp_max * 9/5) + 32)} {temperatureScale}</p>
-          <p>Temperatura min: {temperatureScale === '°C' ? item.main.temp_min : Math.floor((item.main.temp_min * 9/5) + 32)} {temperatureScale}</p>
+          <p>
+            Sensacion termica: {temperatureScale === '°C' ? item.main.feels_like : Math.floor((item.main.feels_like * 9) / 5 + 32)}{' '}
+            {temperatureScale}
+          </p>
+          <p>
+            Temperatura max: {temperatureScale === '°C' ? item.main.temp_max : Math.floor((item.main.temp_max * 9) / 5 + 32)}{' '}
+            {temperatureScale}
+          </p>
+          <p>
+            Temperatura min: {temperatureScale === '°C' ? item.main.temp_min : Math.floor((item.main.temp_min * 9) / 5 + 32)}{' '}
+            {temperatureScale}
+          </p>
         </div>
-        
       </div>
     ));
   };
 
+  const mapIcon = {
+    '01d': '/icons/01d.png',
+    '01n': '/icons/01n.png',
+    '02d': '/icons/02d.png',
+    '02n': '/icons/02n.png',
+    '03d': '/icons/03d.png',
+    '03n': '/icons/03n.png',
+    '04d': '/icons/04d.png',
+    '04n': '/icons/04n.png',
+    '09d': '/icons/09d.png',
+    '09n': '/icons/09n.png',
+    '10d': '/icons/10d.png',
+    '10n': '/icons/10n.png',
+    '11d': '/icons/11d.png',
+    '11n': '/icons/11n.png',
+    '13d': '/icons/13d.png',
+    '13n': '/icons/13n.png',
+    '50d': '/icons/50d.png',
+    '50n': '/icons/50n.png',
+  };
+
   return (
-    <div className="daily-dates">
-      <div className="day-buttons">{renderDayButtons()}</div>
-      <div className="hourly-weather">{renderHourlyWeather()}</div>
+    <div className='daily-dates'>
+      <div className='day-buttons'>{renderDayButtons()}</div>
+      <div className='hourly-weather'>{renderHourlyWeather()}</div>
     </div>
   );
 };
