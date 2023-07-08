@@ -1,1 +1,382 @@
-/*1ro getCurrentPosition
+*{
+    margin: 0;
+    padding:0 ;
+    
+}
+body{
+    font-family: 'Lato', sans-serif;
+    background-image:  radial-gradient(#D5F3FF, #51b4e8);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    
+}
+.weather-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.weather-card {
+    background-color: #d5f3ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    width: 350px;
+    margin: 0 auto;
+    z-index: -1;
+}
+
+h3 {
+    text-align: left;
+    font-size: 22px;
+}
+
+.weather-card .ubi-dates {
+    display: flex;
+    margin-top: 8%;
+    gap: 10px;
+}
+
+.weather-card .ubi-dates span {
+    align-items: center;
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.actual-weather {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10%;
+    width: 100%;
+}
+
+h1 {
+    color: rgb(14, 41, 99);
+    font-weight: 300;
+    font-size: 60px;
+}
+
+.actual-weather .weatherState {
+    display: flex;
+    flex-direction: column;
+}
+
+.actual-weather .weatherState div {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+.actual-weather .weatherState img {
+    height: 180px;
+    margin-left: 15px;
+}
+
+.weather-statistics {
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.weather-statistics .weatherStats {
+    display: flex;
+    gap: 15px;
+}
+
+/*Loader*/
+
+.icon{
+    display: inline-block;
+    font-size: 45px;
+    animation: float 5s ease-in-out infinite;
+    color: #d5f3ff;
+}
+.bxs-cloud{
+animation-delay: 1s;
+}
+.bxs-moon{
+    animation-delay: 2s;
+}
+.bxs-cloud-rain{
+    animation-delay: 3s;
+}
+.bxs-cloud-lightning{
+    animation-delay: 4s;
+}
+
+@keyframes float {
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(-15px);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+/*Loader logo*/
+.loader {
+    background: rgba(15, 133, 211, 0.75);
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*boton temperatura*/
+.tempchange {
+    cursor: pointer;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 10px;
+  margin: 25px auto; /* Agregado para centrar horizontalmente */
+  border-radius: 5px;
+  border-style: none;
+  background-color: #026eed;
+  color: #d5f3ff;
+  z-index: 1;
+}
+.citylocation{
+margin: 50px auto;
+display: flex;
+text-align: center;
+align-items: center;
+justify-items: center;
+justify-content: center;
+height: 35px;
+}
+.inputlocation{
+    background-color: #51b3e800;
+    border-style: none;
+    border-top:solid 3px #0e2963;
+    border-left: solid 3px #0e2963;
+    border-bottom: solid 3px #0e2963;
+    height: 100%;
+    padding-left: 5px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    
+}
+.buttoninput{
+    display: flex;
+    align-items: center;
+    background-color: #ffffff00;
+    font-size: 30px;
+    cursor: pointer;
+    border-style: none;
+    border-top: solid 3px #0e2963;
+    border-right: solid 3px #0e2963;
+    border-bottom: solid 3px #0e2963;
+    height: 115%;
+    color: rgb(34, 36, 151);
+    padding: 1.5vh;
+    border-radius: 2px;
+    border-bottom-right-radius:10px ;
+    
+}
+.extendedweek{
+    
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    
+}
+
+.diaryweatherbutton{
+    display: flex;
+    padding:10px ;
+    border-style: none;
+    border-radius: 10px;
+    background-color: mediumaquamarine;
+    color: antiquewhite ;
+    font-size: 18px;
+    box-shadow: 1px 5px 10px #0e29633a;
+}
+.modalinfo{
+    background-color: #11699c;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.close{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+    margin-right: 15px;
+}
+.closebutton{
+    display: flex;
+    font-size: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    
+}
+.buttonssection h2{
+    color: antiquewhite;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+.day-buttons{
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 5px;
+}
+.day-buttons .daybutton{
+    border-style: none;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 4px;
+    box-shadow: 1px 1px 5px aqua;
+}
+.hourly-weather{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 10px 5px;
+    padding-bottom: 10px;
+}
+.weatherhours{
+    width: 210px;
+    padding: 10px;
+    background-color: #1d91ad4b;
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    background-color: #35e4db83;
+    box-shadow: 0 0 10px #ffffff33;
+}
+.datahours{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.datahours img{
+    height: 100px;
+    display: flex;
+}
+.principaldateshours{
+    display: flex;
+    flex-direction: column;
+}
+.principaldateshours .tempandicon{
+    display: flex;
+}
+.principaldateshours .tempandicon p{
+display: flex;
+font-size: 28px;
+align-items: center;
+}
+
+.active {
+    border-style: none;
+}
+/*Medias*/
+@media only screen and (min-width: 650px) {
+    .tempchange {
+    font-size: 15px;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .weather-card {
+    width: 425px;
+    }
+    h3 {
+    font-size: 24px;
+    }
+    .weather-card .ubi-dates span {
+    font-size: 28px;
+    }
+    h1 {
+    font-size: 75px;
+    }
+    .actual-weather .weatherState div {
+    font-size: 24px;
+    }
+    .actual-weather .weatherState img {
+        height: 200px;
+    }
+    .tempchange {
+        font-size: 20px;
+        }
+    }
+    @media only screen and (min-width: 910px) {
+    .day-buttons .daybutton{
+        width: 120px;
+        display: flex;
+    }
+    }
+
+@media only screen and (min-width: 950px){
+    .hourly-weather{
+        gap: 20px;        
+        }
+}
+@media only screen and (min-width: 1024px) {
+    .weather-card {
+        width: 500px;
+    }
+    h1{
+    font-size: 100px;
+    }
+    h3 {
+    font-size: 28px;
+    }
+    .weather-card .ubi-dates span {
+    font-size: 32px;
+    }
+    .actual-weather .weatherState img {
+    height: 220px;
+    }
+    .tempchange {
+    margin-bottom: 10%;
+    font-size: 22px;
+    }
+    .hourly-weather{
+    gap: 30px;        
+    }
+    @media only screen and (min-width: 1290px) {
+    .hourly-weather{
+    gap: 50px;        
+    }
+    }
+    @media only screen and (min-width: 1370px) {
+        .hourly-weather{
+        gap: 70px;        
+        }
+        }
+    @media only screen and (min-width: 1470px) {
+    .hourly-weather{
+    gap: 100px;        
+    }
+    }
+    @media only screen and (min-width: 1570px) {
+    .hourly-weather{
+    gap: 120px;
+    }
+    }
+}
