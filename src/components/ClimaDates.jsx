@@ -1,7 +1,98 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const ClimaDates = ({ weatherData, temperatureScale }) => {
-  const { main, weather, name, sys } = weatherData;
+const DailyDates = ({ lat, lon, searchQuery, temperatureScale }) => {
+  const [weatherData, setWeatherData] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  useEffect(() => {
+    const getWeather = () => {
+      const apiKey = '895e467400596c4581be31f04d2ed28d';
+      const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+      axios
+        .get(apiUrl)
+        .then((response) => {
+          setWeatherData(response.data.list);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+
+    if (searchQuery) {
+      const apiKey = '895e467400596c4581be31f04d2ed28d';
+      const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchQuery}&appid=${apiKey}&units=metric`;
+
+      axios
+        .get(apiUrl)
+        .then((response) => {
+          setWeatherData(response.data.list);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      getWeather();
+    }
+  }, [lat, lon, searchQuery]);
+
+  const handleDateSelection = (date) => {
+    setSelectedDate((prevDate) => (prevDate === date ? null : date));
+  };
+
+  const renderDayButtons = () => {
+    const uniqueDates = Array.from(new Set(weatherData.map((item) => item.dt_txt.split(' ')[0])));
+
+    return uniqueDates.map((date) => (
+      <button key={date} onClick={() => handleDateSelection(date)} className='daybutton'>
+        {date}
+      </button>
+    ));
+  };
+
+  const convertTemperature = (temp) => {
+    if (temperatureScale === '°C') {
+      return `${temp} °C`;
+    } else {
+      const fahrenheit = Math.floor((temp * 9) / 5 + 32);
+      return `${fahrenheit} °F`;
+    }
+  };
+
+  const renderHourlyWeather = () => {
+    if (!selectedDate) return null;
+
+    const filteredData = weatherData.filter((item) => item.dt_txt.includes(selectedDate));
+
+    return filteredData.map((item) => (
+      <div key={item.dt} className='weatherhours'>
+        <div className='datahours'>
+          <h4>{item.dt_txt.split(' ')[1]}</h4>
+          <div className='principaldateshours'>
+            <div className='tempandicon'>
+              <img src={mapIcon[item.weather[0].icon]} alt='Icono del clima' />
+              <p>{convertTemperature(item.main.temp)}</p>
+            </div>
+            <p>estado: {item.weather[0].description}</p>
+          </div>
+          <p>Humedad: {item.main.humidity} %</p>
+          <p>
+            Sensacion termica: {temperatureScale === '°C' ? item.main.feels_like : Math.floor((item.main.feels_like * 9) / 5 + 32)}{' '}
+            {temperatureScale}
+          </p>
+          <p>
+            Temperatura max: {temperatureScale === '°C' ? item.main.temp_max : Math.floor((item.main.temp_max * 9) / 5 + 32)}{' '}
+            {temperatureScale}
+          </p>
+          <p>
+            Temperatura min: {temperatureScale === '°C' ? item.main.temp_min : Math.floor((item.main.temp_min * 9) / 5 + 32)}{' '}
+            {temperatureScale}
+          </p>
+        </div>
+      </div>
+    ));
+  };
 
   const mapIcon = {
     '01d': '/icons/01d.png',
@@ -24,62 +115,12 @@ const ClimaDates = ({ weatherData, temperatureScale }) => {
     '50n': '/icons/50n.png',
   };
 
-  const weatherIcon = mapIcon[weather[0].icon] || '';
-  const roundedTemp = Math.floor(main.temp);
-
-  const convertTemperature = (temp) => {
-    if (temperatureScale === '°C') {
-      return `${temp} °C`;
-    } else {
-      const fahrenheit = Math.floor((temp * 9) / 5 + 32);
-      return `${fahrenheit} °F`;
-    }
-  };
-
   return (
-    <div className="weather-section">
-      <div className="weather-card">
-        <h3>Clima Actual</h3>
-        <div className="ubi-dates">
-          <span>{name}, </span>
-          <p>{sys.country}</p>
-        </div>
-  
-        <div className="actual-weather">
-          <h1>{convertTemperature(roundedTemp)}</h1>
-          <div className="weatherState">
-            <img src={weatherIcon} alt="Icono del clima" />
-            <div>
-              <h4>Estado: </h4>
-              <p>{weather[0].description}</p>
-            </div>
-          </div>
-        </div>
-  
-        <div className="weather-statistics">
-          <h3>Otras estadísticas</h3>
-          <div className="statisticsSection">
-            <div className="weatherStats">
-              <h4>Humedad: </h4>
-              <p>{main.humidity} %</p>
-            </div>
-            <div className="weatherStats">
-              <h4>Sensación térmica: </h4>
-              <p>{temperatureScale === '°C' ? main.feels_like : Math.floor((main.feels_like * 9/5) + 32)} {temperatureScale}</p>
-            </div>
-            <div className="weatherStats">
-              <h4>Temperatura máxima: </h4>
-              <p>{temperatureScale === '°C' ? main.temp_max : Math.floor((main.temp_max * 9/5) + 32)} {temperatureScale}</p>
-            </div>
-            <div className="weatherStats">
-              <h4>Temperatura mínima: </h4>
-              <p>{temperatureScale === '°C' ? main.temp_min : Math.floor((main.temp_min * 9/5) + 32)} {temperatureScale}</p>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className='daily-dates'>
+      <div className='day-buttons'>{renderDayButtons()}</div>
+      <div className='hourly-weather'>{renderHourlyWeather()}</div>
     </div>
   );
 };
 
-export default ClimaDates;
+export default DailyDates;

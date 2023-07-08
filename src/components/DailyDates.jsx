@@ -72,7 +72,7 @@ console.log(apiUrl)
           <div className='principaldateshours'>
             <div className='tempandicon'>
               <img src={`/public/icons/${item.weather[0].icon}.png`} alt="Weather Icon" />
-              <p>{convertTemperature(item.main.temp)}</p>
+              <p>{convertTemperature(item.main.temp)} °C</p>
             </div>
             <p>estado: {item.weather[0].description}</p>
           </div>
