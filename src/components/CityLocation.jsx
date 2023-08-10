@@ -27,7 +27,7 @@ const CityLocation = ({ setWeatherData,handleSearchQuery }) => {
 
   return (
     <div className='citylocation'>
-      <input className='inputlocation' type="text" value={location} onChange={handleLocationChange} placeholder="Ingrese ciudad, país" />
+      <input className='inputlocation' type="text" value={location} onChange={handleLocationChange} placeholder="debes escribir de esta forma: ciudad, codigo de país" />
       <button className='buttoninput' onClick={handleGetWeather}><i className='bx bx-search-alt'></i></button>
     </div>
   );
