@@ -174,7 +174,7 @@ animation-delay: 1s;
 .tempchange {
     position: fixed;
     cursor: pointer;
-    top: 4vh;
+    top: 1vh;
     right: 4vw;
     display: flex;
     text-align: center;
