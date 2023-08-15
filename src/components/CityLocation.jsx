@@ -26,10 +26,13 @@ const CityLocation = ({ setWeatherData,handleSearchQuery }) => {
   };
 
   return (
-    <div className='citylocation'>
-      <input className='inputlocation' type="text" value={location} onChange={handleLocationChange} placeholder="tipea ciudad, codigo de país" />
-      <button className='buttoninput' onClick={handleGetWeather}><i className='bx bx-search-alt'></i></button>
+    <div className='citylocationsection'>
+        <div className='citylocation'>
+          <input className='inputlocation' type="text" value={location} onChange={handleLocationChange} placeholder="Tipea exactamente: ciudad, codigo de país"/>
+          <button className='buttoninput' onClick={handleGetWeather}><i className='bx bx-search-alt lupa'></i></button>
+      </div>
     </div>
+    
   );
 };
 

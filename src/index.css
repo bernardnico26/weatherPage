@@ -1,7 +1,7 @@
 *{
     margin: 0;
     padding:0 ;
-    
+    box-sizing: border-box;
 }
 body{
     font-family: 'Lato', sans-serif;
@@ -11,13 +11,21 @@ body{
     background-repeat: no-repeat;
     
 }
+.infoweather{
+    height: 100vh;
+}
 .weather-section {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
 }
-
+.weatherinfo{
+    
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 .weather-card {
     background-color: #d5f3ff;
     display: flex;
@@ -25,26 +33,26 @@ body{
     align-items: center;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    height: 80%;
     padding: 20px;
-    width: 350px;
+    width: 90%;
     margin: 0 auto;
     z-index: -1;
 }
-
+.titlesection{
+    height: 10%;
+}
 h3 {
-    text-align: left;
     font-size: 22px;
 }
 
 .weather-card .ubi-dates {
     display: flex;
-    margin-top: 8%;
+    height: 10%;
     gap: 10px;
 }
 
 .weather-card .ubi-dates span {
-    align-items: center;
-    font-size: 25px;
     font-weight: 900;
 }
 
@@ -52,43 +60,56 @@ h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 10%;
+    height: 60%;
     width: 100%;
 }
 
 h1 {
-    color: rgb(14, 41, 99);
-    font-weight: 300;
-    font-size: 60px;
+    color: #0e2963;
+    font-size: 40px;
 }
 
 .actual-weather .weatherState {
     display: flex;
-    flex-direction: column;
-}
-
-.actual-weather .weatherState div {
-    display: flex;
     align-items: center;
-    font-size: 20px;
-    margin-left: 5px;
+    flex-direction: column;
 }
 
 .actual-weather .weatherState img {
-    height: 180px;
-    margin-left: 15px;
+    width: 100px;
+    
 }
-
-.weather-statistics {
-    margin-top: 10%;
+.state{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 20px;
+    width: 100%;
+}
+.weather-statistics {
+    display: flex;
+    flex-direction: column;
+    height: 25%;
     gap: 10px;
 }
-
-.weather-statistics .weatherStats {
+.otherStatisticsTitleSection{
     display: flex;
-    gap: 15px;
+    justify-content: center;
+}
+.statisticsSection{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.weatherStat {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 10px;
+}
+.weatherStat h4{
+max-width: 95px;
 }
 
 /*Loader*/
@@ -136,69 +157,88 @@ animation-delay: 1s;
     justify-content: center;
     align-items: center;
 }
+.allbuttonssection{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 20%;
+}
 /*boton temperatura*/
+.changetempsection{
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
 .tempchange {
+    position: fixed;
     cursor: pointer;
-  display: flex;
-  text-align: center;
-  align-items: center;
-  justify-items: center;
-  justify-content: center;
-  height: 40px;
-  padding: 10px;
-  margin: 25px auto; /* Agregado para centrar horizontalmente */
-  border-radius: 5px;
-  border-style: none;
-  background-color: #026eed;
-  color: #d5f3ff;
-  z-index: 1;
+    top: 4vh;
+    right: 4vw;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    height: 40px;
+    padding: 10px;
+    border-radius: 10px;
+    border-style: none;
+    background-color: #026eed;
+    color: #d5f3ff;
+    box-shadow: 2px 2px 8px #0e2963;
+}
+.citylocationsection{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .citylocation{
-margin: 50px auto;
-display: flex;
-text-align: center;
-align-items: center;
-justify-items: center;
-justify-content: center;
-height: 35px;
+    display: flex;
+    width: 90%;
+    height: 35px;
 }
 .inputlocation{
+    font-size: 10px;
     background-color: #51b3e800;
     border-style: none;
     border-top:solid 3px #0e2963;
     border-left: solid 3px #0e2963;
     border-bottom: solid 3px #0e2963;
+    width: 90%;
     height: 100%;
     padding-left: 5px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    
 }
 .buttoninput{
     display: flex;
     align-items: center;
     background-color: #ffffff00;
-    font-size: 30px;
+    justify-content: center;
     cursor: pointer;
     border-style: none;
     border-top: solid 3px #0e2963;
     border-right: solid 3px #0e2963;
     border-bottom: solid 3px #0e2963;
-    height: 115%;
+    height: 100%;
+    width: 10%;
     color: rgb(34, 36, 151);
     padding: 1.5vh;
-    border-radius: 2px;
     border-bottom-right-radius:10px ;
     
 }
+.lupa{
+font-size: 18px;
+}
 .extendedweek{
-    
     display: flex;
-    align-content: center;
-    justify-content: center;
     align-items: center;
-    margin: 10px;
-    
+    justify-content: center;
+    height: 50%;
 }
 
 .diaryweatherbutton{
@@ -217,41 +257,45 @@ height: 35px;
     width: 100%;
     display: flex;
     flex-direction: column;
-    position: relative;
 }
 .close{
     display: flex;
     justify-content: flex-end;
-    margin-top: 15px;
-    margin-right: 15px;
 }
 .closebutton{
+    margin-top: 5px;
+    margin-right: 5px;
     display: flex;
+    width: 30px;
     font-size: 25px;
     border-radius: 50%;
     cursor: pointer;
     
 }
 .buttonssection h2{
-    color: antiquewhite;
     margin-left: 10px;
-    margin-bottom: 5px;
+    color: antiquewhite;
+    
 }
 .day-buttons{
     margin-bottom: 5px;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 15px;
     padding: 5px;
 }
-.day-buttons .daybutton{
+.daybutton{
     border-style: none;
     display: flex;
     align-content: center;
     justify-content: center;
     align-items: center;
+    width: 40%;
     border-radius: 10px;
     padding: 4px;
-    box-shadow: 1px 1px 5px aqua;
+    box-shadow: 1px 1px 5px 0e2963;
     cursor: pointer;
 }
 .hourly-weather{
@@ -260,14 +304,15 @@ height: 35px;
     align-content: center;
     justify-content: space-evenly;
     align-items: center;
-    gap: 10px 5px;
+    
     padding-bottom: 10px;
 }
 .weatherhours{
-    width: 210px;
+    width: 90%;
     padding: 10px;
+    margin: 10px 5px;
     background-color: #1d91ad4b;
-    border-radius: 30px;
+    border-radius: 10px;
     backdrop-filter: blur(10px);
     background-color: #35e4db83;
     box-shadow: 0 0 10px #ffffff33;
@@ -275,11 +320,20 @@ height: 35px;
 .datahours{
     display: flex;
     flex-direction: column;
+    gap: 5px;
     align-items: center;
+    color: #e4eeed;
 }
 .datahours img{
     height: 100px;
     display: flex;
+}
+.otherbackground{
+    margin-top: 10px;
+    background-color: rgba(7, 7, 71, 0.644);
+}
+.otherbackground h3{
+    font-size: 22px;
 }
 .principaldateshours{
     display: flex;
@@ -293,92 +347,142 @@ display: flex;
 font-size: 28px;
 align-items: center;
 }
-
+.DailystatisticsSection{
+    display: flex;
+    flex-wrap: wrap;
+}
+.DailyweatherStat{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+.DailyweatherStat h4{
+    max-width: 77px;
+}
 .active {
     border-style: none;
 }
 /*Medias*/
-@media only screen and (min-width: 650px) {
+@media only screen and (min-width: 375px) {
+    .inputlocation{
+        font-size: 12px;
+        }
+        .weatherhours{
+            width: 60%;
+        }
+}
+@media only screen and (min-width: 425px) {
+    .citylocation{
+        width: 75%;
+    }
+    .weather-card {
+        width: 75%;
+        }
     .tempchange {
     font-size: 15px;
     }
 }
-@media only screen and (min-width: 768px) {
-    .weather-card {
-    width: 425px;
+@media only screen and (min-width: 500px) {
+    .citylocation{
+        width: 60%;
     }
+    .weather-card {
+        width: 60%;
+    }
+    .day-buttons{
+        flex-direction: initial;
+        flex-wrap: wrap;
+    }
+    .weatherhours{
+        width: 50%;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .inputlocation{
+        font-size: 16px;
+    }
+    
     h3 {
-    font-size: 24px;
+        font-size: 24px;
     }
     .weather-card .ubi-dates span {
-    font-size: 28px;
+        font-size: 28px;
     }
     h1 {
-    font-size: 75px;
-    }
-    .actual-weather .weatherState div {
-    font-size: 24px;
+        font-size: 75px;
     }
     .actual-weather .weatherState img {
-        height: 200px;
+        width: 200px;
+    }
+    .state{
+        flex-direction: initial;
+    }
+    .statisticsSection{
+        flex-direction: initial;
+    }
+    .weatherStat{
+        width: 50%;
+    }
+    .daybutton{
+        width: 30%;
+    }
+    .weatherhours{
+        width: 40%;
     }
     .tempchange {
         font-size: 20px;
-        }
-    }
-    @media only screen and (min-width: 910px) {
-    .day-buttons .daybutton{
-        width: 120px;
-        display: flex;
     }
     }
-
-@media only screen and (min-width: 950px){
-    .hourly-weather{
-        gap: 20px;        
-        }
-}
 @media only screen and (min-width: 1024px) {
+    .citylocation{
+        width: 50%;
+    }
+    .inputlocation{
+        font-size: 18px;
+    }
     .weather-card {
-        width: 500px;
+        width: 50%;
     }
     h1{
-    font-size: 100px;
+        font-size: 100px;
     }
     h3 {
-    font-size: 28px;
+        font-size: 28px;
     }
     .weather-card .ubi-dates span {
-    font-size: 32px;
+        font-size: 32px;
     }
-    .actual-weather .weatherState img {
-    height: 220px;
+    .daybutton{
+        width: 15%;
     }
+    .weatherhours{
+        width: 20%;
+    }
+    
     .tempchange {
-    margin-bottom: 10%;
-    font-size: 22px;
+        font-size: 22px;
     }
-    .hourly-weather{
-    gap: 30px;        
+    
+}
+@media only screen and (min-width: 1290px) {
+    .citylocation{
+        width: 40%;
     }
-    @media only screen and (min-width: 1290px) {
-    .hourly-weather{
-    gap: 50px;        
+    .weather-card {
+    width: 40%;
     }
+    
+}
+@media only screen and (min-width: 1370px) {
+    
+    .actual-weather .weatherState img {
+    width: 220px;
     }
-    @media only screen and (min-width: 1370px) {
-        .hourly-weather{
-        gap: 70px;        
-        }
-        }
-    @media only screen and (min-width: 1470px) {
-    .hourly-weather{
-    gap: 100px;        
-    }
-    }
-    @media only screen and (min-width: 1570px) {
-    .hourly-weather{
-    gap: 120px;
-    }
-    }
+}
+@media only screen and (min-width: 1440px) {
+.daybutton{
+    width: 10%;
+}
 }

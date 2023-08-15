@@ -69,26 +69,41 @@ const DailyDates = ({ lat, lon, searchQuery, temperatureScale }) => {
       <div key={item.dt} className='weatherhours'>
         <div className='datahours'>
           <h4>{item.dt_txt.split(' ')[1]}</h4>
+          
           <div className='principaldateshours'>
             <div className='tempandicon'>
               <img src={mapIcon[item.weather[0].icon]} alt='Icono del clima' />
               <p>{convertTemperature(item.main.temp)}</p>
             </div>
-            <p>estado: {item.weather[0].description}</p>
+            <div className='state'>
+              <h4>Estado: </h4>
+              <p>{item.weather[0].description}</p>
+            </div>
           </div>
-          <p>Humedad: {item.main.humidity} %</p>
-          <p>
-            Sensacion termica: {temperatureScale === '°C' ? item.main.feels_like : Math.floor((item.main.feels_like * 9) / 5 + 32)}{' '}
-            {temperatureScale}
-          </p>
-          <p>
-            Temperatura max: {temperatureScale === '°C' ? item.main.temp_max : Math.floor((item.main.temp_max * 9) / 5 + 32)}{' '}
-            {temperatureScale}
-          </p>
-          <p>
-            Temperatura min: {temperatureScale === '°C' ? item.main.temp_min : Math.floor((item.main.temp_min * 9) / 5 + 32)}{' '}
-            {temperatureScale}
-          </p>
+
+          <div className="weather-statistics">
+            <div className='otherStatisticsTitleSection otherbackground'>
+              <h3>Otras estadísticas</h3>
+            </div>
+            <div className="DailystatisticsSection">
+              <div className="DailyweatherStat">
+                <h4>Humedad: </h4>
+                <p>{item.main.humidity} %</p>
+              </div>
+              <div className="DailyweatherStat">
+                <h4>Sensación térmica:</h4>
+                <p>{temperatureScale === '°C' ? item.main.feels_like : Math.floor((item.main.feels_like * 9/5) + 32)} {temperatureScale}</p>
+              </div>
+              <div className="DailyweatherStat">
+                <h4>Temp max:</h4>
+                <p>{temperatureScale === '°C' ? item.main.temp_max : Math.floor((item.main.temp_max * 9/5) + 32)} {temperatureScale}</p>
+              </div>
+              <div className="DailyweatherStat">
+                <h4>Temp min:</h4>
+                <p>{temperatureScale === '°C' ? item.main.temp_min : Math.floor((item.main.temp_min * 9/5) + 32)} {temperatureScale}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     ));

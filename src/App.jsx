@@ -64,38 +64,45 @@ function App() {
   };
 
   return (
-    <div className='infoweather'>
+    <main className='infoweather'>
       {loading && <Loader />}
       {!loading && (
         <>
           <CityLocation setWeatherData={setWeatherData} handleSearchQuery={handleSearchQuery} />
           <section className='weatherinfo'>
             <ClimaDates weatherData={weatherData} temperatureScale={temperatureScale} />
-            <div className='extendedweek'>
-              {!showDailyWeather && (
-                <button onClick={handleShowDailyWeather} className='diaryweatherbutton'>Ver clima diario</button>
-              )}
-              {showDailyWeather && (
-              <div className='modalinfo'>
-                <div className='close'>
-                  <button onClick={handleHideDailyWeather}className='closebutton'><i className='bx bx-x'></i></button>
+            <div className='allbuttonssection'>
+              <div className='extendedweek'>
+                {!showDailyWeather && (
+                  <div className='diaryweatherbuttonsection'>
+                    <button onClick={handleShowDailyWeather} className='diaryweatherbutton'>Ver clima diario</button>
+                  </div>
+                )}
+                {showDailyWeather && (
+                <div className='modalinfo'>
+                  <div className='close'>
+                    <button onClick={handleHideDailyWeather}className='closebutton'><i className='bx bx-x'></i></button>
+                  </div>
+                  <div className='buttonssection'>
+                    <h2>Selecciona una fecha:</h2>
+                    <DailyDates lat={coordinates.lat} lon={coordinates.lon} searchQuery={searchQuery} temperatureScale={temperatureScale}/>
+                  </div>
+
                 </div>
-                <div className='buttonssection'>
-                  <h2>Selecciona una fecha:</h2>
-                  <DailyDates lat={coordinates.lat} lon={coordinates.lon} searchQuery={searchQuery} temperatureScale={temperatureScale}/>
-                </div>
-                
+                )}
               </div>
-              )}
+              
             </div>
           </section>
-          <button onClick={toggleTemperatureScale} className='tempchange'>
-          Cambiar a {temperatureScale === '°C' ? '°F' : '°C'}
-          </button>
           
+          <div className='changetempsection'>
+            <button onClick={toggleTemperatureScale} className='tempchange'>
+            Cambiar a {temperatureScale === '°C' ? '°F' : '°C'}
+            </button>
+          </div>
         </>
       )}
-    </div>
+    </main>
   );
 }
 

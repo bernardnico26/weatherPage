@@ -37,9 +37,12 @@ const ClimaDates = ({ weatherData, temperatureScale }) => {
   };
 
   return (
-    <div className="weather-section">
+    
       <div className="weather-card">
-        <h3>Clima Actual</h3>
+        <div className='titlesection'>
+          <h3>Clima Actual</h3>
+        </div>
+        
         <div className="ubi-dates">
           <span>{name}, </span>
           <p>{sys.country}</p>
@@ -49,7 +52,7 @@ const ClimaDates = ({ weatherData, temperatureScale }) => {
           <h1>{convertTemperature(roundedTemp)}</h1>
           <div className="weatherState">
             <img src={weatherIcon} alt="Icono del clima" />
-            <div>
+            <div className='state'>
               <h4>Estado: </h4>
               <p>{weather[0].description}</p>
             </div>
@@ -57,28 +60,30 @@ const ClimaDates = ({ weatherData, temperatureScale }) => {
         </div>
   
         <div className="weather-statistics">
-          <h3>Otras estadísticas</h3>
+          <div className='otherStatisticsTitleSection'>
+            <h3>Otras estadísticas</h3>
+          </div>
           <div className="statisticsSection">
-            <div className="weatherStats">
+            <div className="weatherStat">
               <h4>Humedad: </h4>
               <p>{main.humidity} %</p>
             </div>
-            <div className="weatherStats">
-              <h4>Sensación térmica: </h4>
+            <div className="weatherStat">
+              <h4>Sensación térmica:</h4>
               <p>{temperatureScale === '°C' ? main.feels_like : Math.floor((main.feels_like * 9/5) + 32)} {temperatureScale}</p>
             </div>
-            <div className="weatherStats">
-              <h4>Temperatura máxima: </h4>
+            <div className="weatherStat">
+              <h4>Temp max:</h4>
               <p>{temperatureScale === '°C' ? main.temp_max : Math.floor((main.temp_max * 9/5) + 32)} {temperatureScale}</p>
             </div>
-            <div className="weatherStats">
-              <h4>Temperatura mínima: </h4>
+            <div className="weatherStat">
+              <h4>Temp min:</h4>
               <p>{temperatureScale === '°C' ? main.temp_min : Math.floor((main.temp_min * 9/5) + 32)} {temperatureScale}</p>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    
   );
 };
 
